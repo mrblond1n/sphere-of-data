@@ -12,7 +12,8 @@
     "update": "git add . && git commit -m 'update'"
   },
   "dependencies": {
-    "nuxt": "^2.0.0"
+    "nuxt": "^2.0.0",
+    "vue-tags-ball": "^1.2.0"
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.0.0"
