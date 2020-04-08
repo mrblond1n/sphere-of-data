@@ -1,7 +1,15 @@
 <template>
   <v-layout column justify-center align-center>
     <client-only>
-      <tags-ball
+      <!-- <tags-ball
+        :style="{'border':'2px solid black'}"
+        :width="500"
+        :height="500"
+        :radius="200"
+        :tags="tags"
+        :stop="true"
+      />-->
+      <vue-balls
         :style="{'border':'2px solid black'}"
         :width="500"
         :height="500"
@@ -14,7 +22,11 @@
 </template>
 
 <script>
+import vueBalls from "~/components/tags_ball";
 export default {
+  components: {
+    vueBalls
+  },
   data() {
     return {
       tags: []
