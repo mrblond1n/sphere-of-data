@@ -4,6 +4,8 @@ export default {
       let data = await this.$axios.get('/blocks.json');
       let nodes = [];
       Object.values(data.data).forEach(elems => {
+        if (payload <= 0) payload = 0;
+        if (payload >= elems.length) payload = elems.length;
         elems.forEach((el, i) => {
           i < payload ? el.show = false : el.show = true;
           nodes.push(el);
