@@ -1,13 +1,11 @@
 export default {
-  async get_data({ commit }) {
+  async get_data({ commit }, payload) {
     try {
       let data = await this.$axios.get('/blocks.json');
       let nodes = [];
       Object.values(data.data).forEach(elems => {
         elems.forEach((el, i) => {
-          if (i < 5) {
-            el.show = true;
-          }
+          i < payload ? el.show = false : el.show = true;
           nodes.push(el);
         });
       });

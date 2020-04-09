@@ -1,7 +1,8 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
-  mode: 'universal',
+  // mode: 'universal',
+  mode: 'spa',
   /*
   ** Headers of the page
   */
@@ -30,7 +31,8 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    { src: '~/plugins/tags_ball', ssr: false }
+    { src: '~/plugins/tags_ball', ssr: false },
+    { src: '~/plugins/force_graph', ssr: false },
   ],
   /*
   ** Nuxt.js dev-modules
