@@ -12,7 +12,11 @@
     "update": "git add . && git commit -m 'update'"
   },
   "dependencies": {
+    "3d-force-graph": "^1.60.12",
+    "@nuxtjs/axios": "^5.9.7",
     "nuxt": "^2.0.0",
+    "three": "^0.115.0",
+    "three-spritetext": "^1.4.0",
     "vue-tags-ball": "^1.2.0"
   },
   "devDependencies": {

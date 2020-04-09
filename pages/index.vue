@@ -9,23 +9,26 @@
         :tags="tags"
         :stop="true"
       />-->
-      <vue-balls
+      <!-- <vue-balls
         :style="{'border':'2px solid black'}"
         :width="500"
         :height="500"
         :radius="200"
         :tags="tags"
         :stop="true"
-      />
+      />-->
+      <graph />
     </client-only>
   </v-layout>
 </template>
 
 <script>
 import vueBalls from "~/components/tags_ball";
+import graph from "~/components/graph";
 export default {
   components: {
-    vueBalls
+    vueBalls,
+    graph
   },
   data() {
     return {
