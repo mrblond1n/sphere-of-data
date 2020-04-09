@@ -6,7 +6,7 @@ export default {
       Object.values(data.data).forEach(elems => {
         elems.forEach((el, i) => {
           i < +show_nodes ? el.show_node = true : el.show_node = false;
-          i < +show_titles ? el.show_title = false : el.show_title = true;
+          i < +show_titles ? el.show_title = true : el.show_title = false;
           nodes.push(el);
         });
       });

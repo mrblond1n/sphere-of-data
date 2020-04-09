@@ -5,7 +5,7 @@
       @mouseover="is_rotation_active = false"
       @mouseleave="is_rotation_active = true"
     ></div>
-    <div class="panel">
+    <v-card class="panel pa-5" color="indigo">
       <v-text-field
         label="show titles"
         v-model="how_many_show_titles"
@@ -19,7 +19,7 @@
         @keydown.enter="change_show_nodes"
       ></v-text-field>
       <v-text-field label="default distance" :rules="[rules.number]" v-model="distance"></v-text-field>
-    </div>
+    </v-card>
   </div>
 </template>
 
@@ -56,7 +56,8 @@ export default {
     render_graph(data) {
       const elem = document.getElementById("d3graph");
       const Graph = ForceGraph3D()(elem)
-        .graphData(data) // add data
+        .backgroundColor("white")
+        .graphData(data)
         .nodeColor(node => (node.filled === true ? "grey" : "white"))
         .enableNodeDrag(false)
         .enableNavigationControls(this.disable_rotation)
@@ -69,26 +70,30 @@ export default {
         )
         .nodeThreeObject(node => {
           // use a sphere as a drag handle
-          if (node.show_title === true) return;
+
+          // add text sprite if show_title is true
+
           const obj = new THREE.Mesh(
             new THREE.SphereGeometry(5),
             new THREE.MeshBasicMaterial({
               depthWrite: false,
               transparent: true,
               opacity: 1,
-              color: "grey",
+              color: node.filled ? "lightgrey" : "black",
               flatShading: true
             })
           );
-          // add text sprite as child
-          const sprite = new SpriteText(node.title);
-          sprite.color = "grey";
-          sprite.borderWidth = 1;
-          sprite.padding = 3;
-          sprite.textHeight = 8;
-          sprite.position.y = -15;
-          sprite.visible = true;
-          obj.add(sprite);
+          if (node.show_title === true) {
+            const sprite = new SpriteText(node.title);
+            sprite.color = "grey";
+            sprite.borderWidth = 1;
+            sprite.borderColor = "black";
+            sprite.padding = 3;
+            sprite.textHeight = 8;
+            sprite.position.y = -15;
+            sprite.visible = true;
+            obj.add(sprite);
+          }
           return obj;
         });
 
@@ -150,6 +155,7 @@ export default {
 
 <style lang="scss" scoped>
 .panel {
+  background: "indigo";
   position: absolute;
   left: 20px;
   top: 20px;
