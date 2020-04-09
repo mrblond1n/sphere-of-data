@@ -5,7 +5,7 @@
       @mouseover="is_rotation_active = false"
       @mouseleave="is_rotation_active = true"
     ></div>
-    <v-card class="panel pa-5" color="indigo">
+    <v-card class="panel pa-5" color="indigo" dark>
       <v-text-field
         label="show titles"
         v-model="how_many_show_titles"

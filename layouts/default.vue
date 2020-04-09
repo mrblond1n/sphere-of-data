@@ -1,14 +1,14 @@
 <template>
   <v-app dark>
-    <v-app-bar color="indigo" app>
-      <v-toolbar-title>Data prime test task</v-toolbar-title>
+    <v-app-bar color="indigo" app dark>
+      <v-toolbar-title>DATA PRIME - test task</v-toolbar-title>
     </v-app-bar>
     <v-content>
       <v-container>
         <nuxt />
       </v-container>
     </v-content>
-    <v-footer fixed app color="indigo">
+    <v-footer fixed app color="indigo" dark>
       <span class="mr-12">&copy; {{ new Date().getFullYear() }}</span>
       <span>
         author:

@@ -1,7 +1,7 @@
 <template>
   <v-layout column justify-center align-center>
     <client-only>
-      <graph />
+      <!-- <graph /> -->
     </client-only>
   </v-layout>
 </template>
