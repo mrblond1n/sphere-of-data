@@ -31,8 +31,8 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    { src: '~/plugins/tags_ball', ssr: false },
-    { src: '~/plugins/force_graph', ssr: false },
+    // { src: '~/plugins/tags_ball', ssr: false },
+    // { src: '~/plugins/force_graph', ssr: false },
   ],
   /*
   ** Nuxt.js dev-modules

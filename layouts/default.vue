@@ -1,53 +1,27 @@
 <template>
   <v-app dark>
-    <v-app-bar app>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+    <v-app-bar color="indigo" app>
+      <v-toolbar-title>Data prime test task</v-toolbar-title>
     </v-app-bar>
-    <v-navigation-drawer v-model="drawer" temporary fixed>
-      <v-list>
-        <v-list-item>
-          <v-list-item-action>
-            <v-icon light>mdi-repeat</v-icon>
-          </v-list-item-action>
-          <v-list-item-title>Switch drawer (click me)</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
     <v-content>
       <v-container>
         <nuxt />
       </v-container>
     </v-content>
-    <v-footer :fixed="fixed" app>
-      <span>&copy; {{ new Date().getFullYear() }}</span>
+    <v-footer fixed app color="indigo">
+      <span class="mr-12">&copy; {{ new Date().getFullYear() }}</span>
+      <span>
+        author:
+        <a
+          style="color: white"
+          href="mailto:nikita.kirdiapin@gmail.com"
+          target="_blank"
+        >Kirdiapin Nikita</a>
+      </span>
     </v-footer>
   </v-app>
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      clipped: false,
-      drawer: false,
-      fixed: false,
-      items: [
-        {
-          icon: "mdi-apps",
-          title: "Welcome",
-          to: "/"
-        },
-        {
-          icon: "mdi-chart-bubble",
-          title: "Inspire",
-          to: "/inspire"
-        }
-      ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: "Vuetify.js"
-    };
-  }
-};
+export default {};
 </script>

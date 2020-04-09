@@ -1,20 +1,25 @@
 <template>
   <div>
-    <client-only>
-      <div
-        id="d3graph"
-        @mouseover="is_rotation_active = false"
-        @mouseleave="is_rotation_active = true"
-      ></div>
+    <div
+      id="d3graph"
+      @mouseover="is_rotation_active = false"
+      @mouseleave="is_rotation_active = true"
+    ></div>
+    <div class="panel">
       <v-text-field
-        label="сколько показать"
-        v-model="how_many_show_title"
+        label="show titles"
+        v-model="how_many_show_titles"
+        :rules="[rules.number]"
         @keydown.enter="change_show_title"
       ></v-text-field>
-      <v-btn
-        @click="() => {how_many_show_title++ >= list.nodes.length ? list.nodes.length: how_many_show_title; init(how_many_show_title)}"
-      >больше</v-btn>
-    </client-only>
+      <v-text-field
+        label="show nodes"
+        v-model="how_many_show_nodes"
+        :rules="[rules.number]"
+        @keydown.enter="change_show_nodes"
+      ></v-text-field>
+      <v-text-field label="default distance" :rules="[rules.number]" v-model="distance"></v-text-field>
+    </div>
   </div>
 </template>
 
@@ -22,15 +27,19 @@
 import ForceGraph3D from "3d-force-graph";
 import * as THREE from "three";
 import SpriteText from "three-spritetext";
-import { log } from "three";
 export default {
   data() {
     return {
       is_rotation_active: true,
       size: 500,
-      distance: 700,
+      distance: 3000,
       angle: 0,
-      how_many_show_title: 0
+      how_many_show_titles: 0,
+      how_many_show_nodes: 20,
+      disable_rotation: true,
+      rules: {
+        number: v => !isNaN(v) || "Should be a number"
+      }
     };
   },
   computed: {
@@ -39,29 +48,28 @@ export default {
     }
   },
   methods: {
+    init(num) {
+      this.$store.dispatch("get_data", num).then(() => {
+        this.render_graph(this.list);
+      });
+    },
     render_graph(data) {
-      console.log(data);
-
       const elem = document.getElementById("d3graph");
       const Graph = ForceGraph3D()(elem)
-        .width(this.size)
-        .height(this.size)
         .graphData(data) // add data
         .nodeColor(node => (node.filled === true ? "grey" : "white"))
         .enableNodeDrag(false)
-        .enableNavigationControls(false)
-        .showNavInfo(true)
-        .cameraPosition({ z: this.distance })
+        .enableNavigationControls(this.disable_rotation)
+        .showNavInfo(false)
         .nodeLabel(node => `${node.title}`)
-        // .nodeVisibility(node => !node.filled ? true : false)
+        .nodeVisibility(node => (node.show_node ? true : false))
         .onNodeHover(node => (elem.style.cursor = node ? "pointer" : null))
         .onNodeClick(node =>
           node.show !== true ? window.open(node.link, "_blank") : () => {}
         )
         .nodeThreeObject(node => {
           // use a sphere as a drag handle
-          if (node.show === true) return;
-
+          if (node.show_title === true) return;
           const obj = new THREE.Mesh(
             new THREE.SphereGeometry(5),
             new THREE.MeshBasicMaterial({
@@ -72,7 +80,6 @@ export default {
               flatShading: true
             })
           );
-
           // add text sprite as child
           const sprite = new SpriteText(node.title);
           sprite.color = "grey";
@@ -81,10 +88,7 @@ export default {
           sprite.textHeight = 8;
           sprite.position.y = -15;
           sprite.visible = true;
-          // console.log(sprite);
-
           obj.add(sprite);
-
           return obj;
         });
 
@@ -92,33 +96,62 @@ export default {
       setInterval(() => {
         if (this.is_rotation_active) {
           Graph.cameraPosition({
-            x: 700 * Math.sin(angle),
-            z: 700 * Math.cos(angle)
+            x: this.distance * Math.sin(angle),
+            z: this.distance * Math.cos(angle)
           });
           angle += Math.PI / 300;
         }
-      }, 20);
+      }, 15);
     },
-    init(num) {
-      this.$store.dispatch("get_data", num).then(() => {
-        this.render_graph(this.list);
-      });
-    },
+    // panel
     change_show_title() {
-      if (this.how_many_show_title < 0) {
-        this.init(0);
-      } else if (this.how_many_show_title > this.list.nodes.length) {
-        this.init(this.list.nodes.length);
+      if (this.how_many_show_titles === "" || isNaN(this.how_many_show_titles))
+        return;
+      if (this.how_many_show_titles < 0) {
+        this.init({ show_titles: 0, show_nodes: this.how_many_show_nodes });
+      } else if (this.how_many_show_titles > this.list.nodes.length) {
+        this.init({
+          show_titles: this.list.nodes.length,
+          show_nodes: this.how_many_show_nodes
+        });
       } else {
-        this.init(this.how_many_show_title);
+        this.init({
+          show_titles: this.how_many_show_titles,
+          show_nodes: this.how_many_show_nodes
+        });
+      }
+    },
+    change_show_nodes() {
+      if (this.how_many_show_nodes === "" || isNaN(this.how_many_show_nodes))
+        return;
+      if (this.how_many_show_nodes < 0) {
+        this.init({ show_titles: this.how_many_show_titles, show_nodes: 0 });
+      } else if (this.how_many_show_nodes > this.list.nodes.length) {
+        this.init({
+          show_titles: this.how_many_show_titles,
+          show_nodes: this.list.nodes.length
+        });
+      } else {
+        this.init({
+          show_titles: this.how_many_show_titles,
+          show_nodes: this.how_many_show_nodes
+        });
       }
     }
   },
   mounted() {
-    this.init(0);
+    this.init({
+      show_titles: this.how_many_show_titles,
+      show_nodes: this.how_many_show_nodes
+    });
   }
 };
 </script>
 
 <style lang="scss" scoped>
+.panel {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+}
 </style>
