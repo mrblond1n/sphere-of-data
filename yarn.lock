@@ -7353,13 +7353,6 @@ vue-style-loader@^4.1.0:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
 
-vue-tags-ball@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/vue-tags-ball/-/vue-tags-ball-1.2.0.tgz#4bc6c09add54463a96682e78b640ce74ac48eab4"
-  integrity sha512-tZNdHJ8i6f614Rnjtt1SCCDIYFsZ5PH4+Rw2/72P172DXGtVQagwzs15fohNNgL3KcfBNNnOQvHtFFJ/DK3QYQ==
-  dependencies:
-    color "^3.0.0"
-
 vue-template-compiler@^2.6.11:
   version "2.6.11"
   resolved "https://registry.yarnpkg.com/vue-template-compiler/-/vue-template-compiler-2.6.11.tgz#c04704ef8f498b153130018993e56309d4698080"

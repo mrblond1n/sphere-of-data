@@ -16,8 +16,7 @@
     "@nuxtjs/axios": "^5.9.7",
     "nuxt": "^2.0.0",
     "three": "^0.115.0",
-    "three-spritetext": "^1.4.0",
-    "vue-tags-ball": "^1.2.0"
+    "three-spritetext": "^1.4.0"
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.0.0"
