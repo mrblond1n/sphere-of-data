@@ -1,13 +1,13 @@
 
 <template>
-  <v-card width="300" class="pa-5">
+  <v-card width="300" class="pa-5" color="indigo" dark>
     <v-layout justify-center align-center>
-      <v-file-input v-model="file" accept="application/json" label="File input"></v-file-input>
+      <v-file-input v-model="file" accept="application/json" label="JSON file"></v-file-input>
       <v-btn icon @click="onUpload" class="ml-4">
         <v-icon>mdi-upload</v-icon>
       </v-btn>
-      <v-btn icon @click="onLoad" class="ml-4">
-        <v-icon>mdi-load</v-icon>
+      <v-btn icon @click="$store.dispatch('shared/modal', true)" class="ml-4">
+        <v-icon>mdi-help</v-icon>
       </v-btn>
     </v-layout>
   </v-card>
@@ -36,10 +36,10 @@ export default {
       } catch (error) {
         throw error;
       }
-    },
-    onLoad() {
-      this.$store.dispatch("get_user_file");
     }
+    // onLoad() {
+    //   this.$store.dispatch("get_user_file");
+    // }
   }
 };
 </script>

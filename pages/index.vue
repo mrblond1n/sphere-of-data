@@ -1,16 +1,16 @@
 <template>
-  <v-layout column justify-center align-center>
+  <v-layout justify-center align-center>
     <client-only>
-      <graph />
-      <!-- <upload /> -->
-      <!-- <control /> -->
+      <!-- <graph /> -->
+      <upload class="upload" />
+      <control class="control" />
     </client-only>
   </v-layout>
 </template>
 
 <script>
 import graph from "~/components/Sphere";
-import upload from "~/components/Action_with_data";
+import upload from "~/components/Upload";
 import control from "~/components/Control_panel";
 export default {
   components: {
@@ -20,3 +20,16 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.upload {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+}
+.control {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+}
+</style>

@@ -8,6 +8,8 @@
         <nuxt />
       </v-container>
     </v-content>
+    <app-modal />
+    <app-notify />
     <v-footer fixed app color="indigo" dark>
       <span class="mr-12">&copy; {{ new Date().getFullYear() }}</span>
       <span>
@@ -23,5 +25,12 @@
 </template>
 
 <script>
-export default {};
+import appModal from "~/components/Modal";
+import appNotify from "~/components/Notify";
+export default {
+  components: {
+    appModal,
+    appNotify
+  }
+};
 </script>
