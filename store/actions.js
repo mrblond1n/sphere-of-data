@@ -3,7 +3,6 @@ import firebase from 'firebase'
 export default {
   async get_data({ commit }, { show_titles = 20, show_nodes = 20, url }) {
     try {
-      console.log(url);
       let data = await this.$axios.get(url);
       let nodes = [];
       Object.values(data.data).forEach(elems => {
@@ -13,6 +12,8 @@ export default {
           nodes.push(el);
         });
       });
+      console.log(nodes);
+
       commit('get_data', nodes)
     } catch (error) {
       throw error;
