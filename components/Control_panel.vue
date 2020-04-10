@@ -2,7 +2,7 @@
   <v-card class="panel pa-5" color="indigo" dark>
     <v-text-field label="show titles" v-model="how_many_show_titles" :rules="[rules.number]"></v-text-field>
     <v-text-field label="show nodes" v-model="how_many_show_nodes" :rules="[rules.number]"></v-text-field>
-    <v-text-field label="default distance" :rules="[rules.number]" v-model="distance"></v-text-field>
+    <v-text-field label="default distance" v-model="distance" :rules="[rules.number]"></v-text-field>
   </v-card>
 </template>
 

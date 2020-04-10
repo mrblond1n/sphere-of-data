@@ -1,11 +1,9 @@
 <template>
-  <div>
-    <div
-      ref="d3graph"
-      @mouseover="is_rotation_active = false"
-      @mouseleave="is_rotation_active = true"
-    ></div>
-  </div>
+  <div
+    ref="d3graph"
+    @mouseover="is_rotation_active = false"
+    @mouseleave="is_rotation_active = true"
+  ></div>
 </template>
 
 <script>
@@ -18,16 +16,17 @@ export default {
       is_rotation_active: true,
       size: 500,
       angle: 0,
-      disable_rotation: true
+      disable_rotation: true,
+      distance: 700
     };
   },
   computed: {
     list() {
       return this.$store.getters["storage/list"];
-    },
-    distance() {
-      return this.$store.getters["control/distance"];
     }
+    // distance() {
+    //   return this.$store.getters["control/distance"];
+    // }
   },
   methods: {
     init(num) {
@@ -38,7 +37,7 @@ export default {
     render_graph(data) {
       const elem = this.$refs.d3graph;
       const Graph = ForceGraph3D()(elem)
-        // .backgroundColor("white")
+        .backgroundColor("white")
         .graphData(data)
         .nodeColor(node => (node.filled === true ? "grey" : "white"))
         .enableNodeDrag(false)
@@ -54,7 +53,8 @@ export default {
         .nodeThreeObject(node => {
           return this.render_node_object(node);
         });
-      // this.camera_rotation(Graph);
+      this.camera_rotation(Graph);
+      return;
     },
     render_node_object(node) {
       const obj = new THREE.Mesh(
@@ -94,12 +94,7 @@ export default {
     }
   },
   mounted() {
-    // this.$store.dispatch("storage/get_user_file").then(() => {
-    //   this.render_graph(this.list);
-    // });
-    // this.$store.dispatch("storage/get_default_file").then(() => {
     this.render_graph(this.list);
-    // });
   }
 };
 </script>

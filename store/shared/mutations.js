@@ -4,5 +4,8 @@ export default {
   },
   notify(state, payload) {
     state.notify = payload
+  },
+  init(state, payload) {
+    state.init = payload
   }
 }

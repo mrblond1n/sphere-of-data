@@ -1,4 +1,5 @@
 export default () => ({
   modal: false,
-  notify: false
+  notify: false,
+  init: false,
 })

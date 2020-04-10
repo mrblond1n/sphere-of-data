@@ -5,5 +5,8 @@ export default {
   notify({ commit }, payload) {
     commit('notify', payload)
   },
+  init({ commit }, payload) {
+    commit('init', payload)
+  }
 
 }
