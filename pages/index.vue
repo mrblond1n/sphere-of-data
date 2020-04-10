@@ -1,9 +1,9 @@
 <template>
   <v-layout justify-center align-center>
     <client-only>
-      <!-- <graph /> -->
-      <upload class="upload" />
-      <control class="control" />
+      <graph />
+      <!-- <upload class="upload" /> -->
+      <!-- <control class="control" /> -->
     </client-only>
   </v-layout>
 </template>

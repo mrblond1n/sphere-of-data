@@ -1,10 +1,6 @@
 import firebase from 'firebase/app'
 import database from 'firebase/database';
 import 'firebase/auth';
-
-console.log(firebase);
-
-
 let firebaseConfig = {
   apiKey: "AIzaSyAhlmBSZPfP8o-ZkqRsIM0OdVM8c3P-0rE",
   authDomain: "sphere-of-data.firebaseapp.com",

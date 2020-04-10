@@ -23,7 +23,7 @@ export default {
   },
   computed: {
     list() {
-      return this.$store.getters["list"];
+      return this.$store.getters["storage/list"];
     },
     distance() {
       return this.$store.getters["control/distance"];
@@ -31,14 +31,14 @@ export default {
   },
   methods: {
     init(num) {
-      this.$store.dispatch("get_data", num).then(() => {
+      this.$store.dispatch("storage/get_data", num).then(() => {
         this.render_graph(this.list);
       });
     },
     render_graph(data) {
       const elem = this.$refs.d3graph;
       const Graph = ForceGraph3D()(elem)
-        .backgroundColor("white")
+        // .backgroundColor("white")
         .graphData(data)
         .nodeColor(node => (node.filled === true ? "grey" : "white"))
         .enableNodeDrag(false)
@@ -46,7 +46,7 @@ export default {
         .cameraPosition({ z: this.distance })
         .showNavInfo(false)
         .nodeLabel(node => `${node.title}`)
-        .nodeVisibility(node => (node.show_node ? true : false))
+        // .nodeVisibility(node => (node.show_node ? true : false))
         .onNodeHover(node => (elem.style.cursor = node ? "pointer" : null))
         .onNodeClick(node =>
           node.show !== true ? window.open(node.link, "_blank") : () => {}
@@ -54,7 +54,7 @@ export default {
         .nodeThreeObject(node => {
           return this.render_node_object(node);
         });
-      this.camera_rotation(Graph);
+      // this.camera_rotation(Graph);
     },
     render_node_object(node) {
       const obj = new THREE.Mesh(
@@ -94,9 +94,12 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch("get_user_file").then(() => {
-      this.render_graph(this.list);
-    });
+    // this.$store.dispatch("storage/get_user_file").then(() => {
+    //   this.render_graph(this.list);
+    // });
+    // this.$store.dispatch("storage/get_default_file").then(() => {
+    this.render_graph(this.list);
+    // });
   }
 };
 </script>

@@ -12,8 +12,6 @@ export default {
           nodes.push(el);
         });
       });
-      console.log(nodes);
-
       commit('get_data', nodes)
     } catch (error) {
       throw error;
