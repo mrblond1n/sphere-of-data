@@ -1,6 +1,7 @@
 export default () => ({
   list: {
-    nodes:[],
+    nodes: [],
     links: []
-  }
+  },
+  link_to_file: ''
 })
