@@ -54,10 +54,6 @@ export default {
   },
   methods: {
     reload_graph() {
-      // this.$store.dispatch("shared/init", false);
-      // setTimeout(() => {
-      //   this.$store.dispatch("shared/init", true);
-      // }, 2000);
       this.$store.dispatch("storage/get_user_file", {
         show_titles: this.$store.getters["control/how_many_show_titles"],
         show_nodes: this.$store.getters["control/how_many_show_nodes"]
@@ -65,7 +61,7 @@ export default {
       this.$store.dispatch("shared/init", false);
       setTimeout(() => {
         this.$store.dispatch("shared/init", true);
-      }, 1000);
+      }, 300);
     }
   }
 };

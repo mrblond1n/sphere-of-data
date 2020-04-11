@@ -10,7 +10,7 @@
     "start": "nuxt start",
     "generate": "nuxt generate",
     "upd": "git add . && git commit -m 'update'",
-    "deploy": "git add . && git commit -m 'deploy on host' && nuxt generate && firebase deploy && git push"
+    "deploy": "nuxt generate && firebase deploy && git push"
   },
   "dependencies": {
     "3d-force-graph": "^1.60.12",

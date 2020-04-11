@@ -1,7 +1,7 @@
 <template>
-  <v-snackbar v-model="notify">
+  <v-snackbar v-model="notify" :color="notify.color">
     {{ notify.text }}
-    <v-btn :color="notify.color" text @click="$store.dispatch('shared/notify', false)">Close</v-btn>
+    <v-btn text @click="$store.dispatch('shared/notify', false)">Close</v-btn>
   </v-snackbar>
 </template>
 
@@ -12,9 +12,7 @@ export default {
       get() {
         return this.$store.getters["shared/notify"];
       },
-      set(val) {
-        return this.$store.dispatch("shared/notify", val);
-      }
+      set() {}
     }
   }
 };

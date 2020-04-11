@@ -46,7 +46,7 @@ export default {
         .nodeVisibility(node => (node.show_node ? true : false))
         .onNodeHover(node => (elem.style.cursor = node ? "pointer" : null))
         .onNodeClick(node =>
-          node.show !== true ? window.open(node.link, "_blank") : () => {}
+          node.show_title === true ? window.open(node.link, "_blank") : () => {}
         )
         .nodeThreeObject(node => {
           return this.render_node_object(node);
@@ -88,10 +88,10 @@ export default {
           });
           angle += Math.PI / 300;
         }
-      }, 15);
+      }, 10);
     }
   },
-  mounted() {
+  created() {
     this.$store
       .dispatch("storage/get_user_file", {
         show_titles: this.$store.getters["control/how_many_show_titles"],

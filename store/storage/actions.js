@@ -1,19 +1,23 @@
 import firebase from 'firebase'
 
 export default {
-  async get_data({ commit }, { show_titles, show_nodes, url }) {
+  async get_data({ commit, dispatch }, { show_titles, show_nodes, url }) {
     try {
       let data = await this.$axios.get(url);
       let nodes = [];
-      console.log(`Показываем заголовков: ${show_titles}`, `Показываем нодов: ${show_nodes}`);
-
-      Object.values(data.data).forEach(elems => {
-        elems.forEach((el, i) => {
-          i < +show_nodes ? el.show_node = true : el.show_node = false;
-          i < +show_titles ? el.show_title = true : el.show_title = false;
-          nodes.push(el);
+      //check file
+      try {
+        Object.values(data.data).forEach(elems => {
+          elems.forEach((el, i) => {
+            i < +show_nodes ? el.show_node = true : el.show_node = false;
+            i < +show_titles ? el.show_title = true : el.show_title = false;
+            nodes.push(el);
+          });
         });
-      });
+      } catch (error) {
+        dispatch('remove_wrong_file')
+        dispatch('get_default_file', { show_titles, show_nodes })
+      }
       commit('get_data', nodes)
     } catch (error) {
       throw error;
@@ -64,6 +68,44 @@ export default {
           throw error
         });
     } catch (error) {
+      throw error;
+    }
+  },
+  async upload_file({ dispatch }, payload) {
+    try {
+      await firebase
+        .storage()
+        .ref(`user_file`)
+        .put(payload);
+
+      dispatch("shared/notify", {
+        color: "success",
+        text: "File uploaded successfully"
+      }, { root: true });
+    } catch (error) {
+      dispatch("shared/notify", {
+        color: "error",
+        text: error
+      }, { root: true });
+      throw error;
+    }
+  },
+  async remove_wrong_file({ dispatch }) {
+    try {
+      await firebase
+        .storage()
+        .ref(`user_file`)
+        .delete()
+
+      dispatch("shared/notify", {
+        color: "warning",
+        text: "Wrong file successfully removed"
+      }, { root: true });
+    } catch (error) {
+      dispatch("shared/notify", {
+        color: "error",
+        text: error
+      }, { root: true });
       throw error;
     }
   },
