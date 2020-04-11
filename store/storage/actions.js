@@ -1,10 +1,12 @@
 import firebase from 'firebase'
 
 export default {
-  async get_data({ commit }, { show_titles = 20, show_nodes = 20, url }) {
+  async get_data({ commit }, { show_titles, show_nodes, url }) {
     try {
       let data = await this.$axios.get(url);
       let nodes = [];
+      console.log(`Показываем заголовков: ${show_titles}`, `Показываем нодов: ${show_nodes}`);
+
       Object.values(data.data).forEach(elems => {
         elems.forEach((el, i) => {
           i < +show_nodes ? el.show_node = true : el.show_node = false;
@@ -17,7 +19,8 @@ export default {
       throw error;
     }
   },
-  async get_user_file({ dispatch }) {
+  async get_user_file({ dispatch }, { show_titles, show_nodes }) {
+
     let storage = firebase.storage();
     try {
       let gsReference = storage.refFromURL(
@@ -29,11 +32,11 @@ export default {
           let xhr = new XMLHttpRequest();
           xhr.responseType = "blob";
           xhr.open("GET", url);
-          dispatch('get_data', { url })
+          dispatch('get_data', { show_titles, show_nodes, url })
         })
         .catch((error) => {
           if (error.code === 'storage/object-not-found') {
-            dispatch('get_default_file')
+            dispatch('get_default_file', { show_titles, show_nodes })
           } else {
             throw error
           };
@@ -43,7 +46,7 @@ export default {
       throw error;
     }
   },
-  async get_default_file({ dispatch }) {
+  async get_default_file({ dispatch }, { show_titles, show_nodes }) {
     let storage = firebase.storage();
     try {
       let gsReference = storage.refFromURL(
@@ -55,7 +58,7 @@ export default {
           let xhr = new XMLHttpRequest();
           xhr.responseType = "blob";
           xhr.open("GET", url);
-          dispatch('get_data', { url })
+          dispatch('get_data', { show_titles, show_nodes, url })
         })
         .catch(error => {
           throw error

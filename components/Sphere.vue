@@ -16,17 +16,16 @@ export default {
       is_rotation_active: true,
       size: 500,
       angle: 0,
-      disable_rotation: true,
-      distance: 700
+      disable_rotation: true
     };
   },
   computed: {
     list() {
       return this.$store.getters["storage/list"];
+    },
+    distance() {
+      return this.$store.getters["control/distance"];
     }
-    // distance() {
-    //   return this.$store.getters["control/distance"];
-    // }
   },
   methods: {
     init(num) {
@@ -34,8 +33,7 @@ export default {
         this.render_graph(this.list);
       });
     },
-    render_graph(data) {
-      const elem = this.$refs.d3graph;
+    render_graph(elem, data) {
       const Graph = ForceGraph3D()(elem)
         .backgroundColor("white")
         .graphData(data)
@@ -45,7 +43,7 @@ export default {
         .cameraPosition({ z: this.distance })
         .showNavInfo(false)
         .nodeLabel(node => `${node.title}`)
-        // .nodeVisibility(node => (node.show_node ? true : false))
+        .nodeVisibility(node => (node.show_node ? true : false))
         .onNodeHover(node => (elem.style.cursor = node ? "pointer" : null))
         .onNodeClick(node =>
           node.show !== true ? window.open(node.link, "_blank") : () => {}
@@ -94,7 +92,14 @@ export default {
     }
   },
   mounted() {
-    this.render_graph(this.list);
+    this.$store
+      .dispatch("storage/get_user_file", {
+        show_titles: this.$store.getters["control/how_many_show_titles"],
+        show_nodes: this.$store.getters["control/how_many_show_nodes"]
+      })
+      .then(() => {
+        this.render_graph(this.$refs.d3graph, this.list);
+      });
   }
 };
 </script>

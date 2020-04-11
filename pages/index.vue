@@ -1,6 +1,7 @@
 <template>
   <v-layout justify-center align-center>
     <client-only>
+      {{$store.getters['shared/init']}}
       <sphere class="graph" v-if="$store.getters['shared/init']" />
       <upload class="upload" />
       <control class="control" />

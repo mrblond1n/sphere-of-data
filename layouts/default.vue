@@ -3,7 +3,6 @@
     <v-app-bar color="indigo" app dark>
       <v-toolbar-title>DATA PRIME - test task</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn @click="$store.dispatch('shared/init', true)">init app</v-btn>
     </v-app-bar>
     <v-content>
       <v-container>

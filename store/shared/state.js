@@ -1,5 +1,5 @@
 export default () => ({
   modal: false,
   notify: false,
-  init: false,
+  init: true,
 })
