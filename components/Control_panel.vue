@@ -65,7 +65,9 @@ export default {
     }
   },
   mounted() {
-    this.reload_graph();
+    setTimeout(() => {
+      this.reload_graph();
+    }, 1000);
   }
 };
 </script>

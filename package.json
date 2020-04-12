@@ -9,6 +9,7 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
+    "prod": "yarn build && yarn start",
     "upd": "git add . && git commit -m 'update'",
     "deploy": "nuxt generate && firebase deploy && git push"
   },

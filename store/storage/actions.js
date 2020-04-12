@@ -101,11 +101,13 @@ export default {
         text: "Wrong file successfully removed"
       }, { root: true });
     } catch (error) {
-      dispatch("shared/notify", {
-        color: "error",
-        text: error
-      }, { root: true });
-      throw error;
+      console.log(error.message);
+
+      // dispatch("shared/notify", {
+      //   color: "error",
+      //   text: error
+      // }, { root: true });
+      // throw error;
     }
   },
 }

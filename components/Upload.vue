@@ -43,6 +43,14 @@ export default {
       this.$store.dispatch("storage/upload_file", this.file).then(() => {
         this.$refs.file.reset();
         this.$store.dispatch("shared/loading", false);
+        this.$store.dispatch("storage/get_user_file", {
+          show_titles: this.$store.getters["control/how_many_show_titles"],
+          show_nodes: this.$store.getters["control/how_many_show_nodes"]
+        });
+        this.$store.dispatch("shared/init", false);
+        setTimeout(() => {
+          this.$store.dispatch("shared/init", true);
+        }, 300);
       });
     }
   }
