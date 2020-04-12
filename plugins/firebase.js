@@ -1,8 +1,6 @@
 import firebase from 'firebase/app'
-import database from 'firebase/database';
-import 'firebase/auth';
 let firebaseConfig = {
-  apiKey: "AIzaSyAhlmBSZPfP8o-ZkqRsIM0OdVM8c3P-0rE",
+  apiKey: process.env.API_KEY,
   authDomain: "sphere-of-data.firebaseapp.com",
   databaseURL: "https://sphere-of-data.firebaseio.com",
   projectId: "sphere-of-data",

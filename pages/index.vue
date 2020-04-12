@@ -23,14 +23,14 @@ export default {
 
 <style scoped>
 .upload {
-  position: absolute;
+  position: fixed;
   left: 20px;
-  bottom: 20px;
+  bottom: 50px;
 }
 .control {
-  position: absolute;
+  position: fixed;
   left: 20px;
-  top: 20px;
+  top: 70px;
 }
 .graph {
   position: absolute;

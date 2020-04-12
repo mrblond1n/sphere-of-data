@@ -22,7 +22,7 @@ export default {
   data() {
     return {
       rules: {
-        number: v => !isNaN(v) || "Should be a number"
+        number: v => !isNaN(v) || "Must be a number"
       }
     };
   },
@@ -69,6 +69,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-</style>

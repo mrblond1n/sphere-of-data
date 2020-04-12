@@ -48,9 +48,3 @@ export default {
   }
 };
 </script>
-
-<style scoped="">
-img.preview {
-  width: 200px;
-}
-</style>

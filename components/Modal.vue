@@ -2,7 +2,6 @@
   <v-dialog max-width="600" v-model="modal">
     <v-card>
       <v-card-title class="headline">Help to upload JSON file.</v-card-title>
-
       <v-card-text>
         <div>JSON the file should have the following construction</div>
         <code>
@@ -42,6 +41,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-</style>

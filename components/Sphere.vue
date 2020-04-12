@@ -39,7 +39,7 @@ export default {
         .graphData(data)
         .nodeColor(node => (node.filled === true ? "grey" : "white"))
         .enableNodeDrag(false)
-        .enableNavigationControls(this.disable_rotation)
+        .enableNavigationControls(false)
         .cameraPosition({ z: this.distance })
         .showNavInfo(false)
         .nodeLabel(node => `${node.title}`)
@@ -91,7 +91,7 @@ export default {
       }, 10);
     }
   },
-  created() {
+  mounted() {
     this.$store
       .dispatch("storage/get_user_file", {
         show_titles: this.$store.getters["control/how_many_show_titles"],
