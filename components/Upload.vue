@@ -50,7 +50,7 @@ export default {
         this.$store.dispatch("shared/init", false);
         setTimeout(() => {
           this.$store.dispatch("shared/init", true);
-        }, 300);
+        }, 1000);
       });
     }
   }

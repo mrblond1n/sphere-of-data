@@ -9,6 +9,11 @@ export default {
       try {
         Object.values(data.data).forEach(elems => {
           elems.forEach((el, i) => {
+            ['link', 'filled', 'title'].forEach(prop => {
+              if (!el.hasOwnProperty(prop)) {
+                el[prop] = 'No correct'
+              };
+            })
             i < +show_nodes ? el.show_node = true : el.show_node = false;
             i < +show_titles ? el.show_title = true : el.show_title = false;
             nodes.push(el);

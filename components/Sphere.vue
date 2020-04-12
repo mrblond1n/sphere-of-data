@@ -14,7 +14,6 @@ export default {
   data() {
     return {
       is_rotation_active: true,
-      size: 500,
       angle: 0,
       disable_rotation: true
     };
@@ -35,18 +34,21 @@ export default {
     },
     render_graph(elem, data) {
       const Graph = ForceGraph3D()(elem)
+        .height(window.innerHeight)
         .backgroundColor("white")
         .graphData(data)
         .nodeColor(node => (node.filled === true ? "grey" : "white"))
         .enableNodeDrag(false)
-        .enableNavigationControls(false)
+        .enableNavigationControls(true)
         .cameraPosition({ z: this.distance })
         .showNavInfo(false)
         .nodeLabel(node => `${node.title}`)
         .nodeVisibility(node => (node.show_node ? true : false))
         .onNodeHover(node => (elem.style.cursor = node ? "pointer" : null))
         .onNodeClick(node =>
-          node.show_title === true ? window.open(node.link, "_blank") : () => {}
+          node.show_title === true && node.title !== "No correct"
+            ? window.open(node.link, "_blank")
+            : () => {}
         )
         .nodeThreeObject(node => {
           return this.render_node_object(node);

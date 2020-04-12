@@ -33,9 +33,7 @@ export default {
   top: 70px;
 }
 .graph {
-  position: absolute;
+  position: fixed;
   top: 0;
-  left: 0;
-  height: 100%;
 }
 </style>
