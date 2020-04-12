@@ -77,7 +77,6 @@ export default {
         .storage()
         .ref(`user_file`)
         .put(payload);
-
       dispatch("shared/notify", {
         color: "success",
         text: "File uploaded successfully"

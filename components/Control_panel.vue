@@ -63,6 +63,9 @@ export default {
         this.$store.dispatch("shared/init", true);
       }, 300);
     }
+  },
+  mounted() {
+    this.reload_graph();
   }
 };
 </script>
