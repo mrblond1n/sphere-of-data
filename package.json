@@ -19,7 +19,7 @@
     "@nuxtjs/dotenv": "^1.4.1",
     "firebase": "^7.13.2",
     "nuxt": "^2.0.0",
-    "three": "^0.115.0",
+    "three": "^0.125.0",
     "three-spritetext": "^1.4.0",
     "update": "^0.7.4",
     "yarn": "^1.22.4"
